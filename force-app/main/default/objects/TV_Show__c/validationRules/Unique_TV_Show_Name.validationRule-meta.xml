@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Unique_TV_Show_Name</fullName>
+    <active>true</active>
+    <errorConditionFormula>and(
+    Name = VLOOKUP
+       ($ObjectType.TV_Show__c.Fields.Name , $ObjectType.TV_Show__c.Fields.Name, Name ),
+
+    not(
+     Id=VLOOKUP
+         ($ObjectType.TV_Show__c.Fields.Id , $ObjectType.TV_Show__c.Fields.Name, Name )))</errorConditionFormula>
+    <errorMessage>Duplicate TV Show Name field detected. Such name is already in the system.</errorMessage>
+</ValidationRule>
