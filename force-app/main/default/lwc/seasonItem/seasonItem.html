@@ -1,0 +1,19 @@
+<template>
+    <lightning-accordion-section name={num} label={label}>
+        <lightning-button-menu slot="actions"
+                              alternative-text="Show menu"
+                              icon-size="x-small"
+                              menu-alignment="right">
+            <lightning-menu-item value="New" label="Edit"></lightning-menu-item>
+        </lightning-button-menu>
+        <p class="slds-line-clamp_medium" title={description}>{description}</p>
+        <template if:true={displayEpisodes}>
+            <template for:each={season.Episodes__r} for:item="episode">
+                <c-episode-item key={episode.Id} episode={episode}></c-episode-item>
+            </template>
+        </template>
+        
+
+    </lightning-accordion-section>
+
+</template>

@@ -1,0 +1,37 @@
+<template>
+    <lightning-card title="TV Shows" icon-name="utility:collection">
+		<div class="slds-card__body_inner">
+			<!-- Start show list -->
+			<template if:true={shows.data}>
+				<lightning-input type="search"
+					onchange={handleSearchTermChange}
+					variant="label-hidden"
+					class="slds-var-m-bottom_small"
+					label="Search"
+					placeholder="Search for shows"
+					value={searchTerm}>
+				</lightning-input>
+				<lightning-layout multiple-rows="true" pull-to-boundary="small">
+					<template for:each={shows.data} for:item="show" for:index="index">
+						<lightning-layout-item key={show.Id} size="12" class="slds-var-p-horizontal_x-small">
+							<c-show-tile show={show} onshowview={handleShowView}></c-show-tile>
+						</lightning-layout-item>
+					</template>
+				</lightning-layout>
+				<!-- No shows found -->
+				<template if:false={hasResults}>
+					<div class="slds-align_absolute-center slds-var-m-vertical_small">
+						We did not find results...
+					</div>
+				</template>
+			</template>
+			<!-- End show list -->
+			<!-- Data failed to load -->
+			<template if:true={shows.error}>
+				<div class="slds-text-color_error">
+					An error occurred while loading the show list
+				</div>
+			</template>
+		</div>
+	</lightning-card>  
+</template>

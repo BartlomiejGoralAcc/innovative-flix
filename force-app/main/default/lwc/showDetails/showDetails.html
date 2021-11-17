@@ -1,0 +1,24 @@
+<template>
+    <template if:true={show.data}>
+        <lightning-card>
+            <h3 slot="title">
+                <lightning-icon class="slds-m-left_xx-small slds-m-top_xx-small" icon-name="standard:screen" size="medium"></lightning-icon>
+                <span class="slds-m-left_small slds-text-heading_small">{showName}</span>
+            </h3>
+            <div class="slds-m-vertical_small slds-m-horizontal_medium slds-grid">
+                <img style="height: 215px;" src={showLogo} alt="TV Series thumbnail" />
+                <div class="slds-m-left_medium">
+                    <p class="slds-line-clamp_large desc-text" title={showDescription}>{showDescription}</p>
+                    <!-- <div id="badge-container" class="slds-grid slds-wrap slds-m-top_small">
+                        <template if:true={displaySeasons}>
+                            <lightning-badge  label="Season 1" class="slds-col slds-grow-none slds-badge_inverse"></lightning-badge>
+                            <template for:each={allSeasonsExceptFirst} for:item="season" for:index="index">
+                                <c-season-badge key={season.Id} season={season}></c-season-badge>
+                            </template>
+                        </template>
+                    </div> -->
+                </div>
+            </div>
+        </lightning-card>
+    </template>
+</template>

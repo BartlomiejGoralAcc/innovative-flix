@@ -1,0 +1,32 @@
+<template>
+    <div class="slds-border_top slds-p-top_x-small slds-p-horizontal_small">
+        <div class="slds-grid slds-text-longform">
+            <img style="height: 150px;" src={show.Logo_URL__c} alt="TV Series thumbnail" />
+            <div class="slds-p-horizontal_medium slds-grid slds-grid_vertical">
+                <h2 class="slds-text-heading_large">
+                    <a href="#">{show.Name}</a>
+                </h2>
+                <p class="slds-line-clamp_x-small" title={show.Description__c}>{show.Description__c}</p>
+                <p class="slds-col_bump-top">USA</p>
+                <p class="slds-text-body_small">2015-2018</p>
+            </div>
+            <div class="slds-col_bump-left">
+                <lightning-button-icon
+                    icon-name="utility:search"
+                    icon-class="show-tile-button-search"
+                    variant="bare"
+                    alternative-text="Open record"
+                    onclick={handleOpenRecordClick}>
+                </lightning-button-icon>
+            </div>
+            <div>
+                <lightning-button-icon
+                    icon-name="utility:edit"
+                    icon-class="show-tile-button-edit"
+                    variant="bare"
+                    alternative-text="Edit record">
+                </lightning-button-icon>
+            </div>
+        </div>
+    </div>
+</template>
