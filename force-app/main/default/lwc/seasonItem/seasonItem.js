@@ -6,6 +6,7 @@ import DESCRIPTION_FIELD from '@salesforce/schema/Season__c.Description__c';
 
 export default class SeasonItem extends LightningElement {
     @api season;
+    isModalOpen = false;
     
     get label() {
         return 'Season ' + this.num;
@@ -20,4 +21,12 @@ export default class SeasonItem extends LightningElement {
         //FIXME hardcoded naming
         return this.season.Episodes__r && this.season.Episodes__r.length > 0;
     }
+
+    handleEditClick() {
+        this.isModalOpen = true;
+    }
+
+    handleCloseModal(event) {
+		this.isModalOpen = false;
+	}
 }

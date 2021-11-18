@@ -4,7 +4,7 @@
                               alternative-text="Show menu"
                               icon-size="x-small"
                               menu-alignment="right">
-            <lightning-menu-item value="New" label="Edit"></lightning-menu-item>
+            <lightning-menu-item value="New" label="Edit" onclick={handleEditClick}></lightning-menu-item>
         </lightning-button-menu>
         <p class="slds-line-clamp_medium" title={description}>{description}</p>
         <template if:true={displayEpisodes}>
@@ -12,8 +12,7 @@
                 <c-episode-item key={episode.Id} episode={episode}></c-episode-item>
             </template>
         </template>
-        
-
     </lightning-accordion-section>
 
+	<c-show-edit-modal is-open={isModalOpen} object-api-name="Season__c" record-id={season.Id} onclosemodal={handleCloseModal}></c-show-edit-modal>
 </template>

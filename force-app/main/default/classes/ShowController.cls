@@ -1,15 +1,20 @@
 public with sharing class ShowController {
     @AuraEnabled(Cacheable=true)
     public static TV_Show__c[] getShowById(String showId) {
-        return [
+        TV_Show__c[] result = [
             SELECT
                 Id,
                 Name,
                 Description__c,
-                Logo_URL__c
+                Logo_URL__c,
+                Genre__c
             FROM TV_Show__c
             WHERE Id = :showId
         ];
+
+        System.debug(result[0]);
+        System.debug(result[0].Genre__c);
+        return result;
     }
 
     @AuraEnabled(Cacheable=true)
@@ -19,7 +24,8 @@ public with sharing class ShowController {
                 Id,
                 Name,
                 Description__c,
-                Logo_URL__c
+                Logo_URL__c,
+                Genre__c
             FROM TV_Show__c
             ORDER BY Name
             LIMIT 50
@@ -40,7 +46,8 @@ public with sharing class ShowController {
                 Id,
                 Name,
                 Description__c,
-                Logo_URL__c
+                Logo_URL__c,
+                Genre__c
             FROM TV_Show__c
             WHERE Name LIKE :searchTerm
             ORDER BY Name

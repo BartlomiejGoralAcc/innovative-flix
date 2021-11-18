@@ -4,6 +4,8 @@ import searchShows from '@salesforce/apex/ShowController.searchShows';
 export default class ShowSearch extends NavigationMixin(LightningElement) {
 	searchTerm = '';
     shows;
+	isModalOpen = false;
+	selectedShowId;
 
     @wire(searchShows, {searchTerm: '$searchTerm'})
     loadShows(result) {
@@ -34,5 +36,13 @@ export default class ShowSearch extends NavigationMixin(LightningElement) {
                 id: showId
             },
 		});
+	}
+    handleShowEdit(event) {
+		this.selectedShowId = event.detail;
+		this.isModalOpen = true;
+	}
+    handleCloseModal(event) {
+		this.isModalOpen = false;
+		this.selectedShowId = null;
 	}
 }

@@ -14,7 +14,7 @@
 				<lightning-layout multiple-rows="true" pull-to-boundary="small">
 					<template for:each={shows.data} for:item="show" for:index="index">
 						<lightning-layout-item key={show.Id} size="12" class="slds-var-p-horizontal_x-small">
-							<c-show-tile show={show} onshowview={handleShowView}></c-show-tile>
+							<c-show-tile show={show} onshowview={handleShowView} onshowedit={handleShowEdit}></c-show-tile>
 						</lightning-layout-item>
 					</template>
 				</lightning-layout>
@@ -34,4 +34,6 @@
 			</template>
 		</div>
 	</lightning-card>  
+
+	<c-show-edit-modal is-open={isModalOpen} object-api-name="TV_Show__c" record-id={selectedShowId} onclosemodal={handleCloseModal}></c-show-edit-modal>
 </template>
