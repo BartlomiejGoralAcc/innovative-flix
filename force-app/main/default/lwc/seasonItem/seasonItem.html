@@ -5,9 +5,10 @@
                               icon-size="x-small"
                               menu-alignment="right">
             <lightning-menu-item value="Edit" label="Edit" onclick={handleEditClick}></lightning-menu-item>
+            <lightning-menu-item value="Delete" label="Delete" onclick={handleDeleteClick}></lightning-menu-item>
             <lightning-menu-item value="Add" label="Add Episode" onclick={handleClickAddEpisode}></lightning-menu-item>
         </lightning-button-menu>
-        <p class="slds-line-clamp_medium" title={description}>{description}</p>
+        <p class="slds-line-clamp_medium slds-m-bottom_small" title={description}>{description}</p>
         <template if:true={displayEpisodes}>
             <template for:each={season.Episodes__r} for:item="episode">
                 <c-episode-item key={episode.Id} episode={episode}></c-episode-item>

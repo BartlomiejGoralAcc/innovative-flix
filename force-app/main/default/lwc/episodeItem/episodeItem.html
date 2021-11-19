@@ -1,3 +1,24 @@
 <template>
-    <lightning-card title={episode.Name}></lightning-card>
+    <div class="slds-card_boundary slds-has-top-magnet slds-has-bottom-magnet">
+        <lightning-card title={name} >
+            <lightning-button-menu slot="actions"
+                                  alternative-text="Show menu"
+                                  icon-size="x-small"
+                                  menu-alignment="right">
+                <lightning-menu-item value="Edit" label="Edit" onclick={handleEditClick}></lightning-menu-item>
+                <lightning-menu-item value="Delete" label="Delete" onclick={handleClickDeleteEpisode}></lightning-menu-item>
+            </lightning-button-menu>
+            <div class="slds-p-horizontal_medium">
+                <p>{episode.Description__c}</p>
+                <dl class="slds-list_inline slds-m-top_small">
+                    <dt class="slds-item_label slds-text-color_weak">Released:</dt>
+                    <dd class="slds-item_detail">{episode.Release_Date__c}</dd>
+                    <dt class="slds-item_label slds-text-color_weak">Duration:</dt>
+                    <dd class="slds-item_detail">{duration}</dd>
+                </dl>
+            </div>
+        </lightning-card>
+    </div>
+
+	<c-show-edit-modal is-open={isModalOpen} object-api-name="Episode__c" record-id={episode.Id} onclosemodal={handleCloseModal}></c-show-edit-modal>
 </template>

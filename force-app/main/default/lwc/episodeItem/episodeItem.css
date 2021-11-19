@@ -1,0 +1,6 @@
+lightning-card {
+    --sds-c-card-header-spacing-block-start: var(--sds-c-card-header-spacing-block, 0.75rem);
+    --sds-c-card-header-spacing-block-end: var(--sds-c-card-header-spacing-block, 0);
+    --sds-c-card-body-spacing-block-start: var(--sds-c-card-body-spacing-block, 0.75rem);
+    --sds-c-card-body-spacing-block-end: var(--sds-c-card-body-spacing-block, 0.75rem);
+}

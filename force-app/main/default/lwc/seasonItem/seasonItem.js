@@ -2,7 +2,8 @@ import { LightningElement, api } from 'lwc';
 import { getSObjectValue } from '@salesforce/apex';
 import NUMBER_FIELD from '@salesforce/schema/Season__c.Number__c';
 import DESCRIPTION_FIELD from '@salesforce/schema/Season__c.Description__c';
-
+import { deleteRecord } from 'lightning/uiRecordApi';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class SeasonItem extends LightningElement {
     @api season;
@@ -26,6 +27,28 @@ export default class SeasonItem extends LightningElement {
         this.isModalOpen = true;
     }
 
+    handleDeleteClick() {
+        deleteRecord(this.season.Id)
+        .then(() => {
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: 'Success',
+                    message: 'Record deleted',
+                    variant: 'success'
+                })
+            );
+        })
+        .catch(error => {
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: 'Error deleting record',
+                    message: error.body.message,
+                    variant: 'error'
+                })
+            );
+        });
+	}
+
     handleCloseModal(event) {
 		this.isModalOpen = false;
 	}
@@ -36,4 +59,6 @@ export default class SeasonItem extends LightningElement {
         });
         this.dispatchEvent(event);
 	}
+
+    
 }

@@ -1,9 +1,11 @@
 <template>
     <template if:true={videoUrl}>
         <lightning-card title="Watch trailer" icon-name="utility:play">
-            <iframe class="slds-align_absolute-center" width="630" height="430"
-                src={videoUrl}>
-            </iframe>
+            <div class="slds-p-horizontal_medium">
+                <iframe class="slds-align_absolute-center" style="width: 100%; height: 430px;"
+                    src={videoUrl}>
+                </iframe>
+            </div>
         </lightning-card>
     </template>
 </template>

@@ -52,6 +52,8 @@ export default class SeasonComponent extends LightningElement {
         this.newObjectFields = [
             { name: "TV_Show__c", value: this.recordId },
             { name: "Season__c", value: event.detail },
+            //TODO dodać unikalność
+            { name: "Number__c"},
             { name: "Name"},
             { name: "Release_Date__c"},
             { name: "Duration_min__c"}
@@ -60,4 +62,14 @@ export default class SeasonComponent extends LightningElement {
     handleCloseModal(event) {
 		this.isModalOpen = false;
 	}
+
+    // renderedCallback() {
+    //     const style = document.createElement('style');
+    //     style.innerText = `.slds-card__header {
+    //         padding: 0;
+    //     }`;
+    //     this.template.querySelector('lightning-card').appendChild(style);
+
+
+    // }
 }

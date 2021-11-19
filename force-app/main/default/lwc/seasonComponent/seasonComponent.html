@@ -1,28 +1,30 @@
 <template>
-    <template if:true={displaySeasons}>
-        <lightning-accordion onsectiontoggle={handleToggleSection} allow-multiple-sections-open active-section-name="1">
-                <template for:each={seasons} for:item="season" for:index="index">
-                    <c-season-item key={season.Id} onaddnewepisode={handleAddNewEpisode} season={season}></c-season-item>
-                </template>
-                <!-- <lightning-accordion-section name="A" label="Accordion Title A">
-                    <p>This is the content area for section A.</p>
-                </lightning-accordion-section>
-                <lightning-accordion-section name="B" label="Accordion Title A">
-                    <p>This is the content area for section A.</p>
-                </lightning-accordion-section>
-                <lightning-accordion-section name="C" label="Accordion Title A">
-                    <p>This is the content area for section A.</p>
-                </lightning-accordion-section> -->
-        </lightning-accordion>
+    <lightning-card>
         <lightning-button 
             variant="base" 
             label="Add new season" 
             title="Add new season" 
             icon-name="utility:add"
             onclick={handleAddNewSeasonClick}
-            class="slds-m-left_x-small">
+            class="slds-m-left_small">
         </lightning-button>
-    </template>
-
+        <template if:true={displaySeasons}>
+            <lightning-accordion onsectiontoggle={handleToggleSection} allow-multiple-sections-open active-section-name="1">
+                <template for:each={seasons} for:item="season" for:index="index">
+                        <c-season-item key={season.Id} onaddnewepisode={handleAddNewEpisode} season={season}></c-season-item>
+                    </template>
+                    <!-- <lightning-accordion-section name="A" label="Accordion Title A">
+                        <p>This is the content area for section A.</p>
+                    </lightning-accordion-section>
+                    <lightning-accordion-section name="B" label="Accordion Title A">
+                        <p>This is the content area for section A.</p>
+                    </lightning-accordion-section>
+                    <lightning-accordion-section name="C" label="Accordion Title A">
+                        <p>This is the content area for section A.</p>
+                    </lightning-accordion-section> -->
+            </lightning-accordion>
+            
+        </template>
+    </lightning-card>
 	<c-new-record-modal is-open={isModalOpen} object-api-name={modalObject} fields={newObjectFields} onclosemodal={handleCloseModal} ></c-new-record-modal>
 </template>
