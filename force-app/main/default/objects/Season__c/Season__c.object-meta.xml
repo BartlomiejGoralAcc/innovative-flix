@@ -155,8 +155,8 @@
     <externalSharingModel>ControlledByParent</externalSharingModel>
     <label>Season</label>
     <nameField>
-        <displayFormat>S{00}</displayFormat>
-        <label>Season Number</label>
+        <displayFormat>S-ALL-{00}</displayFormat>
+        <label>Season Name</label>
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Seasons</pluralLabel>

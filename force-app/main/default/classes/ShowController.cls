@@ -8,13 +8,15 @@ public with sharing class ShowController {
                 Description__c,
                 Logo_URL__c,
                 Genre__c,
-                Trailer_URL__c
+                Trailer_URL__c,
+                Country__c,
+                Release_Year__c,
+                Number_Of_Episodes__c,
+                Creator__c
             FROM TV_Show__c
             WHERE Id = :showId
         ];
 
-        System.debug(result[0]);
-        System.debug(result[0].Genre__c);
         return result;
     }
 
@@ -27,7 +29,11 @@ public with sharing class ShowController {
                 Description__c,
                 Logo_URL__c,
                 Genre__c,
-                Trailer_URL__c
+                Trailer_URL__c,
+                Country__c,
+                Release_Year__c,
+                Number_Of_Episodes__c,
+                Creator__c
             FROM TV_Show__c
             ORDER BY Name
             LIMIT 50
@@ -50,7 +56,11 @@ public with sharing class ShowController {
                 Description__c,
                 Logo_URL__c,
                 Genre__c,
-                Trailer_URL__c
+                Trailer_URL__c,
+                Country__c,
+                Release_Year__c,
+                Number_Of_Episodes__c,
+                Creator__c
             FROM TV_Show__c
             WHERE Name LIKE :searchTerm
             ORDER BY Name

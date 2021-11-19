@@ -1,3 +1,10 @@
 .desc-text {
     font-size: 14px;
 }
+
+.wide-label {
+    width: 32%;
+}
+.narrow-value {
+    width: 68%;
+}

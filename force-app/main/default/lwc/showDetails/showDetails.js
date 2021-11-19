@@ -8,10 +8,15 @@ import DESCRIPTION_FIELD from '@salesforce/schema/TV_Show__c.Description__c';
 import LOGO_FIELD from '@salesforce/schema/TV_Show__c.Logo_URL__c';
 import GENRE_FIELD from '@salesforce/schema/TV_Show__c.Genre__c';
 import TRAILER_FIELD from '@salesforce/schema/TV_Show__c.Trailer_URL__c';
+import COUNTRY_FIELD from '@salesforce/schema/TV_Show__c.Country__c';
+import RELEASE_FIELD from '@salesforce/schema/TV_Show__c.Release_Year__c';
+import NUMBER_EPI_FIELD from '@salesforce/schema/TV_Show__c.Number_Of_Episodes__c';
+import CREATOR_FIELD from '@salesforce/schema/TV_Show__c.Creator__c';
 // import getShowById from '@salesforce/apex/ShowController.getShowById';
 // import getSeasonByShowId from '@salesforce/apex/SeasonController.getSeasonByShowId';
 
-const showFields = [NAME_FIELD, DESCRIPTION_FIELD, LOGO_FIELD, GENRE_FIELD, TRAILER_FIELD];
+const showFields = [NAME_FIELD, DESCRIPTION_FIELD, LOGO_FIELD, 
+    GENRE_FIELD, TRAILER_FIELD, COUNTRY_FIELD, RELEASE_FIELD, NUMBER_EPI_FIELD, CREATOR_FIELD];
 
 export default class ShowDetails extends LightningElement {
     currentPageReference = null; 
@@ -70,6 +75,18 @@ export default class ShowDetails extends LightningElement {
     get showTrailerUrl() {
         console.log(getFieldValue(this.show.data, TRAILER_FIELD));
         return getFieldValue(this.show.data, TRAILER_FIELD);
+	}
+    get showCountry() {
+        return getFieldValue(this.show.data, COUNTRY_FIELD);
+	}
+    get showReleaseYear() {
+        return getFieldValue(this.show.data, RELEASE_FIELD);
+	}
+    get showNumOfEpisodes() {
+        return getFieldValue(this.show.data, NUMBER_EPI_FIELD);
+	}
+    get showCreator() {
+        return getFieldValue(this.show.data, CREATOR_FIELD);
 	}
 
     // get displaySeasons() {
