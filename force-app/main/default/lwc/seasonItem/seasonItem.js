@@ -29,4 +29,11 @@ export default class SeasonItem extends LightningElement {
     handleCloseModal(event) {
 		this.isModalOpen = false;
 	}
+
+    handleClickAddEpisode() {
+        const event = new CustomEvent('addnewepisode', {
+            detail: this.season.Id
+        });
+        this.dispatchEvent(event);
+	}
 }

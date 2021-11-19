@@ -7,7 +7,8 @@ public with sharing class ShowController {
                 Name,
                 Description__c,
                 Logo_URL__c,
-                Genre__c
+                Genre__c,
+                Trailer_URL__c
             FROM TV_Show__c
             WHERE Id = :showId
         ];
@@ -25,7 +26,8 @@ public with sharing class ShowController {
                 Name,
                 Description__c,
                 Logo_URL__c,
-                Genre__c
+                Genre__c,
+                Trailer_URL__c
             FROM TV_Show__c
             ORDER BY Name
             LIMIT 50
@@ -47,7 +49,8 @@ public with sharing class ShowController {
                 Name,
                 Description__c,
                 Logo_URL__c,
-                Genre__c
+                Genre__c,
+                Trailer_URL__c
             FROM TV_Show__c
             WHERE Name LIKE :searchTerm
             ORDER BY Name

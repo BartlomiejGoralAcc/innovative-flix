@@ -1,14 +1,17 @@
 import { api, wire, LightningElement } from 'lwc';
 import { CurrentPageReference } from 'lightning/navigation';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
+import { publish, MessageContext } from 'lightning/messageService';
+import TRAILER_URL_FOUND_CHANNEL from '@salesforce/messageChannel/Trailer_Url_Found__c';
 import NAME_FIELD from '@salesforce/schema/TV_Show__c.Name';
 import DESCRIPTION_FIELD from '@salesforce/schema/TV_Show__c.Description__c';
 import LOGO_FIELD from '@salesforce/schema/TV_Show__c.Logo_URL__c';
 import GENRE_FIELD from '@salesforce/schema/TV_Show__c.Genre__c';
+import TRAILER_FIELD from '@salesforce/schema/TV_Show__c.Trailer_URL__c';
 // import getShowById from '@salesforce/apex/ShowController.getShowById';
 // import getSeasonByShowId from '@salesforce/apex/SeasonController.getSeasonByShowId';
 
-const showFields = [NAME_FIELD, DESCRIPTION_FIELD, LOGO_FIELD, GENRE_FIELD];
+const showFields = [NAME_FIELD, DESCRIPTION_FIELD, LOGO_FIELD, GENRE_FIELD, TRAILER_FIELD];
 
 export default class ShowDetails extends LightningElement {
     currentPageReference = null; 
@@ -27,12 +30,23 @@ export default class ShowDetails extends LightningElement {
        }
     }
  
+    @wire(MessageContext)
+    messageContext;
+
     @wire(getRecord, { recordId: '$recordId', fields: showFields })
     loadShow(result) {
         this.show = result;
+        
         const genreString = getFieldValue(this.show.data, GENRE_FIELD);
         if(genreString) {
             this.genres = genreString.split(';');
+        }
+
+        if(this.showTrailerUrl) {
+            const payload = { 
+                constant: this.showTrailerUrl
+            };
+            publish(this.messageContext, TRAILER_URL_FOUND_CHANNEL, payload);
         }
     }
 
@@ -52,6 +66,10 @@ export default class ShowDetails extends LightningElement {
         console.log('===========');
         console.log(this.show.data);
         return getFieldValue(this.show.data, LOGO_FIELD);
+	}
+    get showTrailerUrl() {
+        console.log(getFieldValue(this.show.data, TRAILER_FIELD));
+        return getFieldValue(this.show.data, TRAILER_FIELD);
 	}
 
     // get displaySeasons() {

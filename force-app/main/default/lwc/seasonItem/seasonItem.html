@@ -4,7 +4,8 @@
                               alternative-text="Show menu"
                               icon-size="x-small"
                               menu-alignment="right">
-            <lightning-menu-item value="New" label="Edit" onclick={handleEditClick}></lightning-menu-item>
+            <lightning-menu-item value="Edit" label="Edit" onclick={handleEditClick}></lightning-menu-item>
+            <lightning-menu-item value="Add" label="Add Episode" onclick={handleClickAddEpisode}></lightning-menu-item>
         </lightning-button-menu>
         <p class="slds-line-clamp_medium" title={description}>{description}</p>
         <template if:true={displayEpisodes}>

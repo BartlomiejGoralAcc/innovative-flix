@@ -5,6 +5,9 @@ import getSeasonByShowId from '@salesforce/apex/SeasonController.getSeasonByShow
 export default class SeasonComponent extends LightningElement {
     currentPageReference = null; 
     urlStateParameters = null;
+    isModalOpen = false;
+    modalObject;
+    newObjectFields;
 
     /* Params from Url */
     @api recordId = null;
@@ -30,12 +33,31 @@ export default class SeasonComponent extends LightningElement {
 
     }
 
-    // handleSetActiveSectionC() {
-    //     const accordion = this.template.querySelector('.example-accordion');
-
-    //     accordion.activeSectionName = 'C';
-    // }
     get displaySeasons() {
         return this.seasons  && this.seasons.length > 0;
     }
+
+    handleAddNewSeasonClick(event) {
+        this.isModalOpen = true;
+        this.modalObject = 'Season__c';
+        this.newObjectFields = [
+            { name: "TV_Show__c", value: this.recordId },
+            { name: "Number__c"}
+        ];
+        console.log(this.newObjectFields);
+    }
+    handleAddNewEpisode(event) {
+        this.isModalOpen = true;
+        this.modalObject = 'Episode__c';
+        this.newObjectFields = [
+            { name: "TV_Show__c", value: this.recordId },
+            { name: "Season__c", value: event.detail },
+            { name: "Name"},
+            { name: "Release_Date__c"},
+            { name: "Duration_min__c"}
+        ];
+    }
+    handleCloseModal(event) {
+		this.isModalOpen = false;
+	}
 }
