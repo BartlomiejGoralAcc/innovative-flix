@@ -11,7 +11,7 @@
         </lightning-button>
 		<div class="slds-card__body_inner">
 			<!-- Start show list -->
-			<template if:true={shows.data}>
+			<template if:true={shows}>
 				<lightning-input type="search"
 					onchange={handleSearchTermChange}
 					variant="label-hidden"
@@ -21,7 +21,7 @@
 					value={searchTerm}>
 				</lightning-input>
 				<lightning-layout multiple-rows="true" pull-to-boundary="small">
-					<template for:each={shows.data} for:item="show" for:index="index">
+					<template for:each={shows} for:item="show" for:index="index">
 						<lightning-layout-item key={show.Id} size="12" class="slds-var-p-horizontal_x-small">
 							<c-show-tile show={show} onshowview={handleShowView} onshowedit={handleShowEdit}></c-show-tile>
 						</lightning-layout-item>
@@ -35,12 +35,6 @@
 				</template>
 			</template>
 			<!-- End show list -->
-			<!-- Data failed to load -->
-			<template if:true={shows.error}>
-				<div class="slds-text-color_error">
-					An error occurred while loading the show list
-				</div>
-			</template>
 		</div>
 	</lightning-card>  
 

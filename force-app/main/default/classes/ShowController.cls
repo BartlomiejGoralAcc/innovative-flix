@@ -20,7 +20,7 @@ public with sharing class ShowController {
         return result;
     }
 
-    @AuraEnabled(Cacheable=true)
+    @AuraEnabled
     public static TV_Show__c[] getAllShows() {
         return [
             SELECT
@@ -61,7 +61,7 @@ public with sharing class ShowController {
         ];
     }
 
-    @AuraEnabled(Cacheable=true)
+    @AuraEnabled
     public static TV_Show__c[] searchShows(String searchTerm) {
         searchTerm = searchTerm.trim();
         if (searchTerm == '') {

@@ -1,6 +1,8 @@
 import { LightningElement, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import searchShows from '@salesforce/apex/ShowController.searchShows';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+
 export default class ShowSearch extends NavigationMixin(LightningElement) {
 	searchTerm = '';
     shows;
@@ -10,10 +12,30 @@ export default class ShowSearch extends NavigationMixin(LightningElement) {
 	isModalNewOpen = false;
 	newObjectFields;
 
-    @wire(searchShows, {searchTerm: '$searchTerm'})
-    loadShows(result) {
-      this.shows = result;
+    // @wire(searchShows, {searchTerm: '$searchTerm'})
+    loadShows() {
+		console.log('pree');
+    	searchShows({searchTerm: this.searchTerm})
+			.then((result) => {
+				console.log(result);
+				this.shows = result;
+			})
+			.catch(error => {
+				this.dispatchEvent(
+					new ShowToastEvent({
+						title: 'Error get records',
+						message: error.body.message,
+						variant: 'error'
+					})
+				);
+			});
     }
+
+	connectedCallback() {
+		this.loadShows();
+	}
+
+
 	handleSearchTermChange(event) {
 		// Debouncing this method: do not update the reactive property as
 		// long as this function is being called within a delay of 300 ms.
@@ -23,10 +45,11 @@ export default class ShowSearch extends NavigationMixin(LightningElement) {
 		// eslint-disable-next-line @lwc/lwc/no-async-operation
 		this.delayTimeout = setTimeout(() => {
 			this.searchTerm = searchTerm;
+			this.loadShows();
 		}, 300);
 	}
 	get hasResults() {
-		return (this.shows.data.length > 0);
+		return (this.shows.length > 0);
 	}
     handleShowView(event) {
 		const showId = event.detail;
@@ -47,6 +70,7 @@ export default class ShowSearch extends NavigationMixin(LightningElement) {
     handleCloseModal(event) {
 		this.isModalOpen = false;
 		this.selectedShowId = null;
+		this.loadShows();
 	}
 	handleAddNewShowClick(event) {
         this.isModalNewOpen = true;
@@ -64,5 +88,6 @@ export default class ShowSearch extends NavigationMixin(LightningElement) {
     }
 	handleCloseNewModal(event) {
 		this.isModalNewOpen = false;
+		this.loadShows();
 	}
 }

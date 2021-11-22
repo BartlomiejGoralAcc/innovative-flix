@@ -1,5 +1,5 @@
 public with sharing class SeasonController {
-    @AuraEnabled(Cacheable=true)
+    @AuraEnabled
     public static Season__c[] getSeasonByShowId(String showId) {
         // TODO add validation rule to make description__c required
         return [
