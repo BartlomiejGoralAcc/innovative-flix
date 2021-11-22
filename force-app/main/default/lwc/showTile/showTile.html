@@ -4,7 +4,7 @@
             <img style="height: 150px;" src={show.Logo_URL__c} alt="TV Series thumbnail" />
             <div class="slds-p-horizontal_medium slds-grid slds-grid_vertical">
                 <h2 class="slds-text-heading_large">
-                    <a href="#">{show.Name}</a>
+                    <a onclick={handleOpenRecordClick}>{show.Name}</a>
                 </h2>
                 <p class="slds-line-clamp_x-small" title={show.Description__c}>{show.Description__c}</p>
                 <p class="slds-col_bump-top">{show.Country__c}</p>

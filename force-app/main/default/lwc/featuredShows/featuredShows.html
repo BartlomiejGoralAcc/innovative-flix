@@ -1,0 +1,25 @@
+<template>
+    <template if:true={displayFeaturedShows}>
+        <h2 class="slds-text-heading_medium slds-align_absolute-center">Featured TV Shows</h2>
+        <div class="slds-align_absolute-center slds-size_3-of-4">
+            <div class="slds-text-align_center slds-m-around_x-small">
+                <lightning-carousel scroll-duration="3">
+                    <template for:each={featuredShows} for:item="show">
+                        <lightning-carousel-image
+                        key={show.id}
+                        src={show.logo}
+                        data-id={show.id}
+                        onclick={handleCarouselClick}
+                        header={show.title}
+                        description={show.year}
+                        href="javascript:void(0);">
+                    </lightning-carousel-image>
+                    </template>
+                </lightning-carousel>
+            </div>
+        </div>
+    </template>
+    <template if:false={displayFeaturedShows}>
+        <p>No featured TV Shows available</p>
+    </template>
+</template>

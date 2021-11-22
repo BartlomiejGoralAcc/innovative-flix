@@ -11,10 +11,14 @@
             <div class="slds-p-horizontal_medium">
                 <p>{episode.Description__c}</p>
                 <dl class="slds-list_inline slds-m-top_small">
+                    <dt class="slds-item_label slds-text-color_weak">Your mark:</dt>
+                    <c-stars episode-id={episode.Id}></c-stars>
                     <dt class="slds-item_label slds-text-color_weak">Released:</dt>
                     <dd class="slds-item_detail">{episode.Release_Date__c}</dd>
                     <dt class="slds-item_label slds-text-color_weak">Duration:</dt>
                     <dd class="slds-item_detail">{duration}</dd>
+                    <dt class="slds-item_label slds-text-color_weak">Rating:</dt>
+                    <dd class="slds-item_detail">{rating}</dd>
                 </dl>
             </div>
         </lightning-card>

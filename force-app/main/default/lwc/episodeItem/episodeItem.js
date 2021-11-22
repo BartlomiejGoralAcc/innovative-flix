@@ -13,6 +13,9 @@ export default class EpisodeItem extends LightningElement {
     get duration() {
         return this.episode.Duration_min__c + ' min';
     }
+    get rating() {
+        return this.episode.Rating__c;
+    }
 
     handleEditClick() {
         this.isModalOpen = true;
