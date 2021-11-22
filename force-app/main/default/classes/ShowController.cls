@@ -21,23 +21,43 @@ public with sharing class ShowController {
     }
 
     @AuraEnabled
-    public static TV_Show__c[] getAllShows() {
-        return [
-            SELECT
-                Id,
-                Name,
-                Description__c,
-                Logo_URL__c,
-                Genre__c,
-                Trailer_URL__c,
-                Country__c,
-                Release_Year__c,
-                Number_Of_Episodes__c,
-                Creator__c
-            FROM TV_Show__c
-            ORDER BY Name
-            LIMIT 50
-        ];
+    public static TV_Show__c[] getAllShows(Boolean all) {
+        // Database.query(soqlQuery);
+        if (all) {
+            return [
+                SELECT
+                    Id,
+                    Name,
+                    Description__c,
+                    Logo_URL__c,
+                    Genre__c,
+                    Trailer_URL__c,
+                    Country__c,
+                    Release_Year__c,
+                    Number_Of_Episodes__c,
+                    Creator__c
+                FROM TV_Show__c
+                ORDER BY Name
+            ]; 
+        } else {
+            return [
+                SELECT
+                    Id,
+                    Name,
+                    Description__c,
+                    Logo_URL__c,
+                    Genre__c,
+                    Trailer_URL__c,
+                    Country__c,
+                    Release_Year__c,
+                    Number_Of_Episodes__c,
+                    Creator__c
+                FROM TV_Show__c
+                ORDER BY Id ASC
+                LIMIT 4
+            ];
+        }
+        
     }
 
     @AuraEnabled(Cacheable=true)
@@ -62,10 +82,10 @@ public with sharing class ShowController {
     }
 
     @AuraEnabled
-    public static TV_Show__c[] searchShows(String searchTerm) {
+    public static TV_Show__c[] searchShows(String searchTerm, Boolean all) {
         searchTerm = searchTerm.trim();
         if (searchTerm == '') {
-            return getAllShows();
+            return getAllShows(all);
         }
         // Prepare query paramters
         searchTerm = '%' + searchTerm + '%';
@@ -85,7 +105,9 @@ public with sharing class ShowController {
             FROM TV_Show__c
             WHERE Name LIKE :searchTerm
             ORDER BY Name
-            LIMIT 50
+            LIMIT 4
         ];
     }
+
+
 }

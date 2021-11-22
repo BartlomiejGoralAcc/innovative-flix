@@ -1,5 +1,5 @@
 lightning-card {
-    --sds-c-card-header-spacing-block-start: 10px;
+    --sds-c-card-header-spacing-block-start: 0px;
     --sds-c-card-header-spacing-block-end: 0;
     --sds-c-card-body-spacing-block-start: 0;
     --sds-c-card-body-spacing-block-end: 0;

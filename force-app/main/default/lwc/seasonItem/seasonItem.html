@@ -11,7 +11,7 @@
         <p class="slds-line-clamp_medium slds-m-bottom_small" title={description}>{description}</p>
         <template if:true={displayEpisodes}>
             <template for:each={season.Episodes__r} for:item="episode">
-                <c-episode-item key={episode.Id} onclose={handleModalItemClose} episode={episode}></c-episode-item>
+                <c-episode-item key={episode.Id} onrefresh={handleRefresh} episode={episode}></c-episode-item>
             </template>
         </template>
     </lightning-accordion-section>

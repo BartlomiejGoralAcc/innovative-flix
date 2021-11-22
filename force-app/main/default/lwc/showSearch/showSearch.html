@@ -9,6 +9,16 @@
             onclick={handleAddNewShowClick}
             class="slds-m-left_small">
         </lightning-button>
+		<lightning-button 
+            variant="base" 
+			slot="actions"
+            label="View all" 
+            title="View all" 
+            icon-name="utility:all"
+            onclick={handleViewAllClick}
+			disabled={viewAllDisabled}
+            class="slds-m-left_small">
+        </lightning-button>
 		<div class="slds-card__body_inner">
 			<!-- Start show list -->
 			<template if:true={shows}>
@@ -23,7 +33,7 @@
 				<lightning-layout multiple-rows="true" pull-to-boundary="small">
 					<template for:each={shows} for:item="show" for:index="index">
 						<lightning-layout-item key={show.Id} size="12" class="slds-var-p-horizontal_x-small">
-							<c-show-tile show={show} onshowview={handleShowView} onshowedit={handleShowEdit}></c-show-tile>
+							<c-show-tile show={show} onshowview={handleShowView} onshowedit={handleShowEdit} onrefresh={handleRefresh}></c-show-tile>
 						</lightning-layout-item>
 					</template>
 				</lightning-layout>

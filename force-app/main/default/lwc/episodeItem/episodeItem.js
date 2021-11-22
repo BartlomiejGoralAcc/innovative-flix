@@ -1,6 +1,7 @@
 import { LightningElement, api} from 'lwc';
 import { deleteRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import FORM_FACTOR from '@salesforce/client/formFactor'
 
 export default class EpisodeItem extends LightningElement {
     //TODO unique na episode number zrobić
@@ -17,16 +18,17 @@ export default class EpisodeItem extends LightningElement {
         return this.episode.Rating__c;
     }
 
+    get isMobile() {
+        return FORM_FACTOR == 'Small';
+    }
+
     handleEditClick() {
         this.isModalOpen = true;
     }
 
     handleCloseModal(event) {
 		this.isModalOpen = false;
-        console.log('mas');
-        const evt = new CustomEvent('close');
-        this.dispatchEvent(evt);
-        console.log('ben');
+        this.dispatchEvent(new CustomEvent('refresh'));
 	}
 
     handleClickDeleteEpisode() {
@@ -39,6 +41,7 @@ export default class EpisodeItem extends LightningElement {
                     variant: 'success'
                 })
             );
+            this.dispatchEvent(new CustomEvent('refresh'));
         })
         .catch(error => {
             this.dispatchEvent(

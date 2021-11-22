@@ -37,6 +37,7 @@ export default class SeasonItem extends LightningElement {
                     variant: 'success'
                 })
             );
+            this.dispatchEvent(new CustomEvent('refresh'));
         })
         .catch(error => {
             this.dispatchEvent(
@@ -61,8 +62,7 @@ export default class SeasonItem extends LightningElement {
 	}
 
     
-    handleModalItemClose(event) {
-		const evt = new CustomEvent('refresh');
-        this.dispatchEvent(evt);
+    handleRefresh(event) {
+        this.dispatchEvent(new CustomEvent('refresh'));
 	}
 }

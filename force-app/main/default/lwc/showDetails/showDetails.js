@@ -12,10 +12,11 @@ import COUNTRY_FIELD from '@salesforce/schema/TV_Show__c.Country__c';
 import RELEASE_FIELD from '@salesforce/schema/TV_Show__c.Release_Year__c';
 import NUMBER_EPI_FIELD from '@salesforce/schema/TV_Show__c.Number_Of_Episodes__c';
 import CREATOR_FIELD from '@salesforce/schema/TV_Show__c.Creator__c';
+import RATING_FIELD from '@salesforce/schema/TV_Show__c.TMDB_Rating__c';
 // import getShowById from '@salesforce/apex/ShowController.getShowById';
 // import getSeasonByShowId from '@salesforce/apex/SeasonController.getSeasonByShowId';
 
-const showFields = [NAME_FIELD, DESCRIPTION_FIELD, LOGO_FIELD, 
+const showFields = [NAME_FIELD, DESCRIPTION_FIELD, LOGO_FIELD, RATING_FIELD,
     GENRE_FIELD, TRAILER_FIELD, COUNTRY_FIELD, RELEASE_FIELD, NUMBER_EPI_FIELD, CREATOR_FIELD];
 
 export default class ShowDetails extends LightningElement {
@@ -41,7 +42,6 @@ export default class ShowDetails extends LightningElement {
     @wire(getRecord, { recordId: '$recordId', fields: showFields })
     loadShow(result) {
         this.show = result;
-        
         const genreString = getFieldValue(this.show.data, GENRE_FIELD);
         if(genreString) {
             this.genres = genreString.split(';');
@@ -54,12 +54,6 @@ export default class ShowDetails extends LightningElement {
             publish(this.messageContext, TRAILER_URL_FOUND_CHANNEL, payload);
         }
     }
-
-    // @wire(getSeasonByShowId, { showId: '$recordId'})
-    // loadSeasons(result) {
-    //     console.log(result);
-    //     this.seasons = result;
-    // }
 
     get showName() {
         return getFieldValue(this.show.data, NAME_FIELD);
@@ -87,6 +81,12 @@ export default class ShowDetails extends LightningElement {
 	}
     get showCreator() {
         return getFieldValue(this.show.data, CREATOR_FIELD);
+	}
+    get displayRating() {
+        return this.showRating && 0.0 !== this.showRating;
+	}
+    get showRating() {
+        return getFieldValue(this.show.data, RATING_FIELD);
 	}
 
     // get displaySeasons() {

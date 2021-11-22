@@ -27,6 +27,7 @@ export default class ShowTile extends LightningElement {
                     variant: 'success'
                 })
             );
+            this.dispatchEvent(new CustomEvent('refresh'));
         })
         .catch(error => {
             this.dispatchEvent(

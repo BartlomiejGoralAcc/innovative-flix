@@ -17,14 +17,18 @@
                         </template>
                     </div>
                     <dl class="slds-list_horizontal slds-m-top_small slds-wrap">
-                        <dt class="slds-item_label slds-text-color_weak slds-truncate wide-label" title="First Label">Number Of Episodes:</dt>
-                        <dd class="slds-item_detail slds-truncate narrow-value" title="Description for first label">{showNumOfEpisodes}</dd>
-                        <dt class="slds-item_label slds-text-color_weak slds-truncate wide-label" title="Second Label">Country:</dt>
-                        <dd class="slds-item_detail slds-truncate narrow-value" title="Description for second label">{showCountry}</dd>
-                        <dt class="slds-item_label slds-text-color_weak slds-truncate wide-label" title="First Label">Release Year:</dt>
-                        <dd class="slds-item_detail slds-truncate narrow-value" title="Description for first label">{showReleaseYear}</dd>
-                        <dt class="slds-item_label slds-text-color_weak slds-truncate wide-label" title="Second Label">Creator:</dt>
-                        <dd class="slds-item_detail slds-truncate narrow-value" title="Description for second label">{showCreator}</dd>
+                        <dt class="slds-item_label slds-text-color_weak slds-truncate wide-label">Number Of Episodes:</dt>
+                        <dd class="slds-item_detail slds-truncate narrow-value">{showNumOfEpisodes}</dd>
+                        <dt class="slds-item_label slds-text-color_weak slds-truncate wide-label">Country:</dt>
+                        <dd class="slds-item_detail slds-truncate narrow-value">{showCountry}</dd>
+                        <dt class="slds-item_label slds-text-color_weak slds-truncate wide-label">Release Year:</dt>
+                        <dd class="slds-item_detail slds-truncate narrow-value">{showReleaseYear}</dd>
+                        <dt class="slds-item_label slds-text-color_weak slds-truncate wide-label">Creator:</dt>
+                        <dd class="slds-item_detail slds-truncate narrow-value">{showCreator}</dd>
+                        <template if:true={displayRating}>
+                            <dt class="slds-item_label slds-text-color_weak slds-truncate wide-label">TMDB Rating:</dt>
+                            <dd class="slds-item_detail slds-truncate narrow-value">{showRating}</dd>
+                        </template>
                     </dl>
                 </div>
             </div>

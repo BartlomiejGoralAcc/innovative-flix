@@ -10,16 +10,30 @@
             </lightning-button-menu>
             <div class="slds-p-horizontal_medium">
                 <p>{episode.Description__c}</p>
-                <dl class="slds-list_inline slds-m-top_small">
-                    <dt class="slds-item_label slds-text-color_weak">Your mark:</dt>
-                    <c-stars episode-id={episode.Id}></c-stars>
-                    <dt class="slds-item_label slds-text-color_weak">Released:</dt>
-                    <dd class="slds-item_detail">{episode.Release_Date__c}</dd>
-                    <dt class="slds-item_label slds-text-color_weak">Duration:</dt>
-                    <dd class="slds-item_detail">{duration}</dd>
-                    <dt class="slds-item_label slds-text-color_weak">Rating:</dt>
-                    <dd class="slds-item_detail">{rating}</dd>
-                </dl>
+                <template if:false={isMobile}>
+                    <dl class="slds-list_inline slds-m-top_small">
+                        <dt class="slds-item_label slds-text-color_weak">Your mark:</dt>
+                        <c-stars episode-id={episode.Id}></c-stars>
+                        <dt class="slds-item_label slds-text-color_weak">Released:</dt>
+                        <dd class="slds-item_detail">{episode.Release_Date__c}</dd>
+                        <dt class="slds-item_label slds-text-color_weak">Duration:</dt>
+                        <dd class="slds-item_detail">{duration}</dd>
+                        <dt class="slds-item_label slds-text-color_weak">Rating:</dt>
+                        <dd class="slds-item_detail">{rating}</dd>
+                    </dl>
+                </template>
+                <template if:true={isMobile}>
+                    <dl class="slds-list_horizontal slds-wrap">
+                        <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Second Label">Score:</dt>
+                        <dd class="slds-item_detail" title="Description for second label"><c-stars episode-id={episode.Id}></c-stars></dd>
+                        <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Second Label">Released:</dt>
+                        <dd class="slds-item_detail slds-truncate" title="Description for second label">{episode.Release_Date__c}</dd>
+                        <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Second Label">Duration:</dt>
+                        <dd class="slds-item_detail slds-truncate" title="Description for second label">{duration}</dd>
+                        <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Second Label">Rating:</dt>
+                        <dd class="slds-item_detail slds-truncate" title="Description for second label">{rating}</dd>
+                    </dl>
+                </template>
             </div>
         </lightning-card>
     </div>

@@ -6,16 +6,15 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 export default class ShowSearch extends NavigationMixin(LightningElement) {
 	searchTerm = '';
     shows;
+	viewAllDisabled = false;
 	isModalOpen = false;
 	selectedShowId;
 
 	isModalNewOpen = false;
 	newObjectFields;
 
-    // @wire(searchShows, {searchTerm: '$searchTerm'})
-    loadShows() {
-		console.log('pree');
-    	searchShows({searchTerm: this.searchTerm})
+    loadShows(isAll) {
+    	searchShows({searchTerm: this.searchTerm, all: isAll})
 			.then((result) => {
 				console.log(result);
 				this.shows = result;
@@ -32,24 +31,18 @@ export default class ShowSearch extends NavigationMixin(LightningElement) {
     }
 
 	connectedCallback() {
-		this.loadShows();
+		this.loadShows(false);
 	}
 
-
 	handleSearchTermChange(event) {
-		// Debouncing this method: do not update the reactive property as
-		// long as this function is being called within a delay of 300 ms.
-		// This is to avoid a very large number of Apex method calls.
+		this.viewAllDisabled = false;
 		window.clearTimeout(this.delayTimeout);
 		const searchTerm = event.target.value;
 		// eslint-disable-next-line @lwc/lwc/no-async-operation
 		this.delayTimeout = setTimeout(() => {
 			this.searchTerm = searchTerm;
-			this.loadShows();
+			this.loadShows(false);
 		}, 300);
-	}
-	get hasResults() {
-		return (this.shows.length > 0);
 	}
     handleShowView(event) {
 		const showId = event.detail;
@@ -70,7 +63,7 @@ export default class ShowSearch extends NavigationMixin(LightningElement) {
     handleCloseModal(event) {
 		this.isModalOpen = false;
 		this.selectedShowId = null;
-		this.loadShows();
+		this.loadShows(false);
 	}
 	handleAddNewShowClick(event) {
         this.isModalNewOpen = true;
@@ -88,6 +81,16 @@ export default class ShowSearch extends NavigationMixin(LightningElement) {
     }
 	handleCloseNewModal(event) {
 		this.isModalNewOpen = false;
-		this.loadShows();
+		this.loadShows(false);
+	}
+	handleViewAllClick(event) {
+		this.loadShows(true);
+		this.viewAllDisabled = true;
+	}
+	handleRefresh(event) {
+		this.loadShows(false);
+	}
+	get hasResults() {
+		return (this.shows.length > 0);
 	}
 }
