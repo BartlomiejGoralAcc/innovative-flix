@@ -61,4 +61,8 @@ export default class SeasonItem extends LightningElement {
 	}
 
     
+    handleModalItemClose(event) {
+		const evt = new CustomEvent('refresh');
+        this.dispatchEvent(evt);
+	}
 }

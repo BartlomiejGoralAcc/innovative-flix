@@ -84,4 +84,7 @@ export default class SeasonComponent extends LightningElement {
 		this.isModalOpen = false;
         this.loadSeasons();
 	}
+    handleRefresh(event) {
+        this.loadSeasons();
+	}
 }

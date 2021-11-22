@@ -11,7 +11,7 @@
         <template if:true={displaySeasons}>
             <lightning-accordion onsectiontoggle={handleToggleSection} allow-multiple-sections-open active-section-name="1">
                 <template for:each={seasons} for:item="season" for:index="index">
-                        <c-season-item key={season.Id} onaddnewepisode={handleAddNewEpisode} season={season}></c-season-item>
+                        <c-season-item key={season.Id} onrefresh={handleRefresh} onaddnewepisode={handleAddNewEpisode} season={season}></c-season-item>
                     </template>
             </lightning-accordion>
         </template>

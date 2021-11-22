@@ -23,6 +23,10 @@ export default class EpisodeItem extends LightningElement {
 
     handleCloseModal(event) {
 		this.isModalOpen = false;
+        console.log('mas');
+        const evt = new CustomEvent('close');
+        this.dispatchEvent(evt);
+        console.log('ben');
 	}
 
     handleClickDeleteEpisode() {
