@@ -1,6 +1,7 @@
 import { LightningElement, wire, api} from 'lwc';
 import { CurrentPageReference } from 'lightning/navigation';
 import getSeasonByShowId from '@salesforce/apex/SeasonController.getSeasonByShowId';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class SeasonComponent extends LightningElement {
     currentPageReference = null; 
@@ -21,16 +22,35 @@ export default class SeasonComponent extends LightningElement {
        }
     }
 
-    @wire(getSeasonByShowId, { showId: '$recordId'})
+    @wire(getSeasonByShowId, )
     loadSeasons(result) {
         console.log('Seaaasons');
         console.log(result);
         this.seasons = result.data;
     }
 
+    connectedCallback() {
+		this.loadSeasons();
+	}
+
+    loadSeasons() {
+    	getSeasonByShowId({ showId: this.recordId })
+			.then((result) => {
+				this.seasons = result;
+			})
+			.catch(error => {
+				this.dispatchEvent(
+					new ShowToastEvent({
+						title: 'Error get records',
+						message: error.body.message,
+						variant: 'error'
+					})
+				);
+			});
+    }
+
     handleToggleSection(event) {
         console.log('accordion');
-
     }
 
     get displaySeasons() {
@@ -55,11 +75,13 @@ export default class SeasonComponent extends LightningElement {
             //TODO dodać unikalność
             { name: "Number__c"},
             { name: "Name"},
+            { name: "Description__c"},
             { name: "Release_Date__c"},
             { name: "Duration_min__c"}
         ];
     }
     handleCloseModal(event) {
 		this.isModalOpen = false;
+        this.loadSeasons();
 	}
 }
