@@ -62,14 +62,4 @@ export default class SeasonComponent extends LightningElement {
     handleCloseModal(event) {
 		this.isModalOpen = false;
 	}
-
-    // renderedCallback() {
-    //     const style = document.createElement('style');
-    //     style.innerText = `.slds-card__header {
-    //         padding: 0;
-    //     }`;
-    //     this.template.querySelector('lightning-card').appendChild(style);
-
-
-    // }
 }

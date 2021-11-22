@@ -1,5 +1,14 @@
 <template>
     <lightning-card title="TV Shows" icon-name="utility:collection">
+		<lightning-button 
+            variant="base" 
+			slot="actions"
+            label="Add new TV Show" 
+            title="Add new TV Show" 
+            icon-name="utility:add"
+            onclick={handleAddNewShowClick}
+            class="slds-m-left_small">
+        </lightning-button>
 		<div class="slds-card__body_inner">
 			<!-- Start show list -->
 			<template if:true={shows.data}>
@@ -36,4 +45,5 @@
 	</lightning-card>  
 
 	<c-show-edit-modal is-open={isModalOpen} object-api-name="TV_Show__c" record-id={selectedShowId} onclosemodal={handleCloseModal}></c-show-edit-modal>
+	<c-new-record-modal is-open={isModalNewOpen} object-api-name="TV_Show__c" fields={newObjectFields} onclosemodal={handleCloseNewModal} ></c-new-record-modal>
 </template>

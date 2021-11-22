@@ -7,6 +7,9 @@ export default class ShowSearch extends NavigationMixin(LightningElement) {
 	isModalOpen = false;
 	selectedShowId;
 
+	isModalNewOpen = false;
+	newObjectFields;
+
     @wire(searchShows, {searchTerm: '$searchTerm'})
     loadShows(result) {
       this.shows = result;
@@ -44,5 +47,22 @@ export default class ShowSearch extends NavigationMixin(LightningElement) {
     handleCloseModal(event) {
 		this.isModalOpen = false;
 		this.selectedShowId = null;
+	}
+	handleAddNewShowClick(event) {
+        this.isModalNewOpen = true;
+        this.newObjectFields = [
+            { name: "Name"},
+            { name: "Genre__c"},
+            { name: "Creator__c"},
+            { name: "Country__c"},
+            { name: "Release_Year__c"},
+            { name: "Description__c"},
+            { name: "Logo_URL__c"},
+            { name: "Trailer_URL__c"},
+            { name: "Featured__c"},
+        ];
+    }
+	handleCloseNewModal(event) {
+		this.isModalNewOpen = false;
 	}
 }

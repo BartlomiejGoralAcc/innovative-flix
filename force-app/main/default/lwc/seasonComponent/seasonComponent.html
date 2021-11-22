@@ -13,17 +13,7 @@
                 <template for:each={seasons} for:item="season" for:index="index">
                         <c-season-item key={season.Id} onaddnewepisode={handleAddNewEpisode} season={season}></c-season-item>
                     </template>
-                    <!-- <lightning-accordion-section name="A" label="Accordion Title A">
-                        <p>This is the content area for section A.</p>
-                    </lightning-accordion-section>
-                    <lightning-accordion-section name="B" label="Accordion Title A">
-                        <p>This is the content area for section A.</p>
-                    </lightning-accordion-section>
-                    <lightning-accordion-section name="C" label="Accordion Title A">
-                        <p>This is the content area for section A.</p>
-                    </lightning-accordion-section> -->
             </lightning-accordion>
-            
         </template>
     </lightning-card>
 	<c-new-record-modal is-open={isModalOpen} object-api-name={modalObject} fields={newObjectFields} onclosemodal={handleCloseModal} ></c-new-record-modal>
