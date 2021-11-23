@@ -4,7 +4,6 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import FORM_FACTOR from '@salesforce/client/formFactor'
 
 export default class EpisodeItem extends LightningElement {
-    //TODO unique na episode number zrobić
     @api episode;
     isModalOpen;
 
