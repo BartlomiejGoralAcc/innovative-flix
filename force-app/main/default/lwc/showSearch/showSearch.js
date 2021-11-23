@@ -1,6 +1,7 @@
 import { LightningElement, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import searchShows from '@salesforce/apex/ShowController.searchShows';
+import canModifyFeatured from '@salesforce/apex/UserController.canModifyFeatured';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class ShowSearch extends NavigationMixin(LightningElement) {
@@ -12,6 +13,7 @@ export default class ShowSearch extends NavigationMixin(LightningElement) {
 
 	isModalNewOpen = false;
 	newObjectFields;
+	canModifyFeatured = false;
 
     loadShows(isAll) {
     	searchShows({searchTerm: this.searchTerm, all: isAll})
@@ -32,6 +34,14 @@ export default class ShowSearch extends NavigationMixin(LightningElement) {
 
 	connectedCallback() {
 		this.loadShows(false);
+
+		canModifyFeatured()
+		.then((result) => {
+			this.canModifyFeatured = result;
+        })
+        .catch(error => {
+            console.log(error);
+        });
 	}
 
 	handleSearchTermChange(event) {
@@ -75,9 +85,11 @@ export default class ShowSearch extends NavigationMixin(LightningElement) {
             { name: "Release_Year__c"},
             { name: "Description__c"},
             { name: "Logo_URL__c"},
-            { name: "Trailer_URL__c"},
-            { name: "Featured__c"},
+            { name: "Trailer_URL__c"}
         ];
+		if(this.canModifyFeatured) {
+			this.newObjectFields = [...this.newObjectFields, { name: "Featured__c"}];
+		}
     }
 	handleCloseNewModal(event) {
 		this.isModalNewOpen = false;
@@ -89,6 +101,7 @@ export default class ShowSearch extends NavigationMixin(LightningElement) {
 	}
 	handleRefresh(event) {
 		this.loadShows(false);
+		this.viewAllDisabled = false;
 	}
 	get hasResults() {
 		return (this.shows.length > 0);
