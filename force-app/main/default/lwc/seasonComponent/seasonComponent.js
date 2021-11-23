@@ -9,6 +9,7 @@ export default class SeasonComponent extends LightningElement {
     isModalOpen = false;
     modalObject;
     newObjectFields;
+    displaySpinner = true;
 
     /* Params from Url */
     @api recordId = null;
@@ -22,13 +23,6 @@ export default class SeasonComponent extends LightningElement {
        }
     }
 
-    @wire(getSeasonByShowId, )
-    loadSeasons(result) {
-        console.log('Seaaasons');
-        console.log(result);
-        this.seasons = result.data;
-    }
-
     connectedCallback() {
 		this.loadSeasons();
 	}
@@ -37,8 +31,10 @@ export default class SeasonComponent extends LightningElement {
     	getSeasonByShowId({ showId: this.recordId })
 			.then((result) => {
 				this.seasons = result;
+                this.displaySpinner = false;
 			})
 			.catch(error => {
+                this.displaySpinner = false;
 				this.dispatchEvent(
 					new ShowToastEvent({
 						title: 'Error get records',

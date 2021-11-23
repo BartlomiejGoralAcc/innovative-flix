@@ -15,6 +15,9 @@
                     </template>
             </lightning-accordion>
         </template>
+        <template if:true={displaySpinner}>
+            <lightning-spinner alternative-text="Loading"></lightning-spinner>
+        </template>
     </lightning-card>
 	<c-new-record-modal is-open={isModalOpen} object-api-name={modalObject} fields={newObjectFields} onclosemodal={handleCloseModal} ></c-new-record-modal>
 </template>
