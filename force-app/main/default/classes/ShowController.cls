@@ -22,42 +22,15 @@ public with sharing class ShowController {
 
     @AuraEnabled
     public static TV_Show__c[] getAllShows(Boolean all) {
-        // Database.query(soqlQuery);
+        String query = 'SELECT Id,Name,Description__c,Logo_URL__c,Genre__c,Trailer_URL__c,Country__c,Release_Year__c,' + 
+                       'Number_Of_Episodes__c,Creator__c ' +
+                       'FROM TV_Show__c ';
         if (all) {
-            return [
-                SELECT
-                    Id,
-                    Name,
-                    Description__c,
-                    Logo_URL__c,
-                    Genre__c,
-                    Trailer_URL__c,
-                    Country__c,
-                    Release_Year__c,
-                    Number_Of_Episodes__c,
-                    Creator__c
-                FROM TV_Show__c
-                ORDER BY Name
-            ]; 
+            query = query + 'ORDER BY Name '; 
         } else {
-            return [
-                SELECT
-                    Id,
-                    Name,
-                    Description__c,
-                    Logo_URL__c,
-                    Genre__c,
-                    Trailer_URL__c,
-                    Country__c,
-                    Release_Year__c,
-                    Number_Of_Episodes__c,
-                    Creator__c
-                FROM TV_Show__c
-                ORDER BY Id ASC
-                LIMIT 4
-            ];
+            query = query + 'ORDER BY Id ASC LIMIT 4 '; 
         }
-        
+        return Database.query(query);
     }
 
     @AuraEnabled(Cacheable=true)
